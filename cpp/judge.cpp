@@ -635,6 +635,8 @@ int judge(char *data_dir)
         if(test_name==NULL)continue; //不是输入数据，跳过
         char *data_in_path = get_datafile_path(data_dir,test_name,"in");
         char *data_out_path = get_datafile_path(data_dir,test_name,"out");  //输出文件路径
+        if(access(data_out_path,F_OK)==-1)
+            continue;
         test_count++;
         print_log("Running on test %d | Files: %s.in(%dB)=>%s.out(%dB)\n", test_count,test_name,file_size(data_in_path),test_name,file_size(data_out_path));
         int pid=fork();
